@@ -16,17 +16,21 @@ Baccarat game:
 
 Functions:
 
+0) Create the deck
+0.1) Copy the deck 8 times
 1) Shuffle - Fisher Yates function
-1.2) Betting function
-1.3) Tie bets
-1.4) Side bets - Extra Credit
-2) Deal all cards
-2.1) Deal third card
-3) Record who wins
-3.1) Compare hands
-3.2) Pay out to winners, receive from losers
-4) Output list of winners
-4.1) Write CSV output.
+1.1) Insert cut-card
+2) Extra Credit 
+2.1) Betting function 
+2.2) Tie bets
+2.3) Side bets
+3) Deal all cards
+3.1) Deal third card
+4) Record who wins
+4.1) Compare hands
+4.2) Pay out to winners, receive from losers
+5) Output list of winners
+5.1) Write CSV output.
 
 Wants:
 Loopability
