@@ -1,0 +1,15 @@
+C:\Users\amath\Documents\GitHub\BaccaratGame\Baccarat\bin\Debug\net9.0\Baccarat.exe
+C:\Users\amath\Documents\GitHub\BaccaratGame\Baccarat\bin\Debug\net9.0\Baccarat.deps.json
+C:\Users\amath\Documents\GitHub\BaccaratGame\Baccarat\bin\Debug\net9.0\Baccarat.runtimeconfig.json
+C:\Users\amath\Documents\GitHub\BaccaratGame\Baccarat\bin\Debug\net9.0\Baccarat.dll
+C:\Users\amath\Documents\GitHub\BaccaratGame\Baccarat\bin\Debug\net9.0\Baccarat.pdb
+C:\Users\amath\Documents\GitHub\BaccaratGame\Baccarat\obj\Debug\net9.0\Baccarat.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\amath\Documents\GitHub\BaccaratGame\Baccarat\obj\Debug\net9.0\Baccarat.AssemblyInfoInputs.cache
+C:\Users\amath\Documents\GitHub\BaccaratGame\Baccarat\obj\Debug\net9.0\Baccarat.AssemblyInfo.cs
+C:\Users\amath\Documents\GitHub\BaccaratGame\Baccarat\obj\Debug\net9.0\Baccarat.csproj.CoreCompileInputs.cache
+C:\Users\amath\Documents\GitHub\BaccaratGame\Baccarat\obj\Debug\net9.0\Baccarat.sourcelink.json
+C:\Users\amath\Documents\GitHub\BaccaratGame\Baccarat\obj\Debug\net9.0\Baccarat.dll
+C:\Users\amath\Documents\GitHub\BaccaratGame\Baccarat\obj\Debug\net9.0\refint\Baccarat.dll
+C:\Users\amath\Documents\GitHub\BaccaratGame\Baccarat\obj\Debug\net9.0\Baccarat.pdb
+C:\Users\amath\Documents\GitHub\BaccaratGame\Baccarat\obj\Debug\net9.0\Baccarat.genruntimeconfig.cache
+C:\Users\amath\Documents\GitHub\BaccaratGame\Baccarat\obj\Debug\net9.0\ref\Baccarat.dll
