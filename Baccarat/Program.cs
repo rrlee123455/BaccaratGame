@@ -4,11 +4,15 @@ using System;
 using System.Collections.Generic;
 public class Baccarat
 {
-	public static void Main()
-	{
-		Deck deck = new Deck();
-		deck.FillDeck(8); // Fill the deck with 8 decks of cards
-		deck.PrintDeck();
+    public static void Main()
+    {
+        Deck deck = new Deck();
+        deck.FillDeck(1); // Fill the deck with 8 decks of cards
+        deck.PrintDeck();
+        Console.WriteLine("\n\nSHUFFLINGGGGGGGGGGGGGGGGGGGG\n\n");
+        deck.ShuffleDeck();
+        deck.PrintDeck();
+
 	}
 }
 
@@ -16,7 +20,7 @@ public class Card
 {
 	public enum Suits
 	{
-		Hearts, Diamonds, Clubs, Spades
+		Spades, Diamonds, Clubs, Hearts
 	}
 
 	public int Value
@@ -84,11 +88,12 @@ public class Card
 
 public class Deck
 {
-	public List<Card> Cards = new List<Card>();
-	public void FillDeck(int NumberofDecks)
-	{
+    public List<Card> cards = new List<Card>();
+    private Random rng = new Random();
+    public void FillDeck(int NumberofDecks)
+    {
         int totalCards = NumberofDecks * 52;
-		//Can use a single loop utilising the mod operator % and Math.Floor
+        //Can use a single loop utilising the mod operator % and Math.Floor
         //Using division based on 13 cards in a suit
         for (int i = 0; i < totalCards; i++)
         {
@@ -96,15 +101,24 @@ public class Deck
             //Add 2 to value as a cards start at 2
             int val = i % 13 + 2;
             int deckNumber = (int)Math.Floor((decimal)i / 52) + 1; // Calculate the deck number
-            Cards.Add(new Card(val, suit, deckNumber));
+            cards.Add(new Card(val, suit, deckNumber));
         }
-	}
-	
-	public void PrintDeck()
-	{
-		foreach(Card card in this.Cards)
-		{
-			Console.WriteLine(card.Name);
-		}
-	}
+    }
+
+    public void PrintDeck()
+    {
+        foreach (Card card in this.cards)
+        {
+            Console.WriteLine(card.Name);
+        }
+    }
+
+    public void ShuffleDeck()
+    {   //fisher-yates shuffle https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
+        for (int i = this.cards.Count - 1; i > 0; i--)
+        {
+            int j = rng.Next(0, i + 1);
+            (this.cards[i], this.cards[j]) = (this.cards[j], this.cards[i]);
+        }
+    }
 }
