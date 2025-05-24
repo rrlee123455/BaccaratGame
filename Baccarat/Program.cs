@@ -11,8 +11,9 @@ public class Baccarat
         deck.PrintDeck();
         Console.WriteLine("\n\nSHUFFLINGGGGGGGGGGGGGGGGGGGG\n\n");
         deck.ShuffleDeck();
+        deck.InsertCutCard();
         deck.PrintDeck();
-
+        deck.Deal();
 	}
 }
 
@@ -69,14 +70,30 @@ public class Card
             return name;
         }
     }
+    
+    public int BaccaratValue
+    {
+        get
+        {
+            if (Value == 14)
+            {
+                return 1; // Ace counts as 1
+            }
+            else if (Value > 10)
+            {
+                return 0; // Face cards and above count as 0 in Baccarat
+            }
+            return Value; // 2-9 count as their face value
+        }
+    }
 
 	public string Name
-	{
-		get
-		{
-			return NamedValue + " of " + Suit.ToString() + ", deck number " + DeckNumber;
-		}
-	}
+    {
+        get
+        {
+            return NamedValue + " of " + Suit.ToString() + ", deck number " + DeckNumber;
+        }
+    }
 
 	public Card(int Value, Suits Suit, int DeckNumber = 1)
     {
@@ -119,6 +136,30 @@ public class Deck
         {
             int j = rng.Next(0, i + 1);
             (this.cards[i], this.cards[j]) = (this.cards[j], this.cards[i]);
+        }
+    }
+
+    public void InsertCutCard()
+    {
+        //Insert a cut card at a random position between 12.5% and 25% of the deck
+        int cutCardPosition = rng.Next((int)(this.cards.Count * 0.125), (int)(this.cards.Count * 0.25));
+        Card cutCard = new Card(0, Card.Suits.Spades); // Cut card is 0 of spades
+        this.cards.Insert(cutCardPosition, cutCard);
+    }
+
+    public void Deal()
+    {
+        // Deal two cards to each player
+        Console.WriteLine("Dealing cards...");
+        for (int i = 0; i < 2; i++)
+        {
+            Card playerCard = this.cards[this.cards.Count - 1];
+            this.cards.RemoveAt(this.cards.Count - 1);
+            Console.WriteLine($"Player {i + 1} receives: {playerCard.Name}");
+            Card playerCard2 = this.cards[this.cards.Count - 1];
+            this.cards.RemoveAt(this.cards.Count - 1);
+            Console.WriteLine($"Player {i + 1} receives: {playerCard2.Name}");
+            Console.WriteLine($"Player {i + 1} Baccarat Value: {(playerCard.BaccaratValue + playerCard2.BaccaratValue) % 10}");
         }
     }
 }

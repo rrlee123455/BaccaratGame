@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Ray\\Documents\\GitHub\\BaccaratGame\\BaccaratGame\\Baccarat\\Baccarat.csproj": {}
+    "C:\\Users\\amath\\Documents\\GitHub\\BaccaratGame\\Baccarat\\Baccarat.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Ray\\Documents\\GitHub\\BaccaratGame\\BaccaratGame\\Baccarat\\Baccarat.csproj": {
+    "C:\\Users\\amath\\Documents\\GitHub\\BaccaratGame\\Baccarat\\Baccarat.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ray\\Documents\\GitHub\\BaccaratGame\\BaccaratGame\\Baccarat\\Baccarat.csproj",
+        "projectUniqueName": "C:\\Users\\amath\\Documents\\GitHub\\BaccaratGame\\Baccarat\\Baccarat.csproj",
         "projectName": "Baccarat",
-        "projectPath": "C:\\Users\\Ray\\Documents\\GitHub\\BaccaratGame\\BaccaratGame\\Baccarat\\Baccarat.csproj",
-        "packagesPath": "C:\\Users\\Ray\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ray\\Documents\\GitHub\\BaccaratGame\\BaccaratGame\\Baccarat\\obj\\",
+        "projectPath": "C:\\Users\\amath\\Documents\\GitHub\\BaccaratGame\\Baccarat\\Baccarat.csproj",
+        "packagesPath": "C:\\Users\\amath\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\amath\\Documents\\GitHub\\BaccaratGame\\Baccarat\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Ray\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\amath\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -38,7 +38,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net9.0": {
@@ -59,7 +59,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
