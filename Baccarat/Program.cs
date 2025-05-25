@@ -72,14 +72,14 @@ public class Card
     }
     
     public int BaccaratValue
-    {
+    {   //2-9, face value, 10 = 10, 11 = J, 12 = Q, 13 = K, 14 = A
         get
         {
             if (Value == 14)
             {
                 return 1; // Ace counts as 1
             }
-            else if (Value > 10)
+            else if (Value >= 10)
             {
                 return 0; // Face cards and above count as 0 in Baccarat
             }
