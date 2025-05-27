@@ -7,9 +7,10 @@ public class Baccarat
     public static void Main()
     {
         Deck deck = new Deck();
+        Console.Write("\n\n\nFilling shoe\n.\n.\n.\n");
         deck.FillDeck(1); // Fill the deck with 8 decks of cards
         deck.PrintDeck();
-        Console.WriteLine("\n\nSHUFFLINGGGGGGGGGGGGGGGGGGGG\n\n");
+        Console.WriteLine("\n\nShuffling shoe\n.\n.\n.\n\n\n");
         deck.ShuffleDeck();
         deck.InsertCutCard();
         deck.PrintDeck();
@@ -162,14 +163,14 @@ public class Deck
 
         playerCards.Add(Draw());
         Console.WriteLine($"Player receives: {playerCards[1].Name}");
-        Console.WriteLine($"Player Baccarat Value: {(playerCards[0].BaccaratValue + playerCards[1].BaccaratValue) % 10}");
+        Console.WriteLine($"Player Baccarat Value: {PlayerTotalBaccaratValue()}");
 
         bankerCards.Add(Draw());
         Console.WriteLine($"\nBanker receives: {bankerCards[0].Name}");
 
         bankerCards.Add(Draw());
         Console.WriteLine($"Banker receives: {bankerCards[1].Name}");
-        Console.WriteLine($"Banker Baccarat Value: {(bankerCards[0].BaccaratValue + bankerCards[1].BaccaratValue) % 10}");
+        Console.WriteLine($"Banker Baccarat Value: {bankerTotalBaccaratValue()}");
 
         PlayerThirdCardRule();
         BankerThirdCardRule();
