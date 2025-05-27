@@ -19,22 +19,22 @@ public class Baccarat
 
 public class Card
 {
-	public enum Suits
-	{
-		Spades, Diamonds, Clubs, Hearts
-	}
+    public enum Suits
+    {
+        Spades, Diamonds, Clubs, Hearts
+    }
 
-	public int Value
-	{
-		get;
-		set;
-	}
+    public int Value
+    {
+        get;
+        set;
+    }
 
-	public Suits Suit
-	{
-		get;
-		set;
-	}
+    public Suits Suit
+    {
+        get;
+        set;
+    }
 
     public int DeckNumber
     {
@@ -42,7 +42,7 @@ public class Card
         set;
     }
 
-	//Used to get full name, also useful if you want to just get the named value
+    //Used to get full name, also useful if you want to just get the named value
     public string NamedValue
     {
         get
@@ -70,7 +70,7 @@ public class Card
             return name;
         }
     }
-    
+
     public int BaccaratValue
     {   //2-9, face value, 10 = 10, 11 = J, 12 = Q, 13 = K, 14 = A
         get
@@ -87,7 +87,7 @@ public class Card
         }
     }
 
-	public string Name
+    public string Name
     {
         get
         {
@@ -95,18 +95,24 @@ public class Card
         }
     }
 
-	public Card(int Value, Suits Suit, int DeckNumber = 1)
+    public Card(int Value, Suits Suit, int DeckNumber = 1)
     {
         this.Value = Value;
         this.Suit = Suit;
         this.DeckNumber = DeckNumber;
     }
+    public Card()
+    {}
 }
 
 public class Deck
 {
     public List<Card> cards = new List<Card>();
     private Random rng = new Random();
+    private List<Card> playerCards = new List<Card>();
+    private List<Card> bankerCards = new List<Card>();
+    private bool playerThirdCardExists = false;
+    private bool bankerThirdCardExists = false;
     public void FillDeck(int NumberofDecks)
     {
         int totalCards = NumberofDecks * 52;
@@ -150,16 +156,85 @@ public class Deck
     public void Deal()
     {
         // Deal two cards to each player
-        Console.WriteLine("Dealing cards...");
-        for (int i = 0; i < 2; i++)
+        Console.WriteLine("\n\nDealing cards...");
+        playerCards.Add(Draw());
+        Console.WriteLine($"Player receives: {playerCards[0].Name}");
+
+        playerCards.Add(Draw());
+        Console.WriteLine($"Player receives: {playerCards[1].Name}");
+        Console.WriteLine($"Player Baccarat Value: {(playerCards[0].BaccaratValue + playerCards[1].BaccaratValue) % 10}");
+
+        bankerCards.Add(Draw());
+        Console.WriteLine($"\nBanker receives: {bankerCards[0].Name}");
+
+        bankerCards.Add(Draw());
+        Console.WriteLine($"Banker receives: {bankerCards[1].Name}");
+        Console.WriteLine($"Banker Baccarat Value: {(bankerCards[0].BaccaratValue + bankerCards[1].BaccaratValue) % 10}");
+
+        PlayerThirdCardRule();
+        BankerThirdCardRule();
+    }
+
+    public Card Draw()
+    {
+        Card card = this.cards[this.cards.Count - 1];
+        this.cards.RemoveAt(this.cards.Count - 1);
+        return card;
+    }
+
+    public int PlayerTotalBaccaratValue()
+    {
+        int playerTotal = 0;
+        foreach (Card card in playerCards)
         {
-            Card playerCard = this.cards[this.cards.Count - 1];
-            this.cards.RemoveAt(this.cards.Count - 1);
-            Console.WriteLine($"Player {i + 1} receives: {playerCard.Name}");
-            Card playerCard2 = this.cards[this.cards.Count - 1];
-            this.cards.RemoveAt(this.cards.Count - 1);
-            Console.WriteLine($"Player {i + 1} receives: {playerCard2.Name}");
-            Console.WriteLine($"Player {i + 1} Baccarat Value: {(playerCard.BaccaratValue + playerCard2.BaccaratValue) % 10}");
+            playerTotal += card.BaccaratValue;
         }
+        return playerTotal % 10;
+    }
+
+    public int bankerTotalBaccaratValue()
+    {
+        int bankerTotal = 0;
+        foreach (Card card in bankerCards)
+        {
+            bankerTotal += card.BaccaratValue;
+        }
+        return bankerTotal % 10;
+    }
+
+    public void PlayerThirdCardRule()
+    {
+        if (PlayerTotalBaccaratValue() <= 5)
+        {
+            playerCards.Add(Draw());
+            playerThirdCardExists = true;
+            Console.WriteLine($"\nPlayer total <= 5: Player draws {playerCards[2].Name}");
+            Console.WriteLine($"Player total: {PlayerTotalBaccaratValue()}");
+        }
+        // do nothing
+    }
+
+    public void BankerThirdCardRule()
+    {
+        //banker <= 2
+        //banker == 3 and player 3rd card = 8
+        //banker == 4 and player 3rd card btwn 2-7 inclusive
+        //banker == 5 and player 3rd card btwn 4-7 inclusive
+        //banker == 6 and player 3rd card btwn 6-7 inclusive
+        if (bankerTotalBaccaratValue() <= 2 ||
+            (playerThirdCardExists &&
+            ((bankerTotalBaccaratValue() == 3 && playerCards[2].BaccaratValue == 8) ||
+            (bankerTotalBaccaratValue() == 4 && playerCards[2].BaccaratValue >= 2 && playerCards[2].BaccaratValue <= 7) ||
+            (bankerTotalBaccaratValue() == 5 && playerCards[2].BaccaratValue >= 4 && playerCards[2].BaccaratValue <= 7) ||
+            (bankerTotalBaccaratValue() == 6 && playerCards[2].BaccaratValue >= 6 && playerCards[2].BaccaratValue <= 7)
+            ))
+        )
+        {
+            bankerCards.Add(Draw());
+            bankerThirdCardExists = true;
+            Console.WriteLine($"\nBanker 3rd rule applies and draws {bankerCards[2].Name}");
+            Console.WriteLine($"Banker total: {bankerTotalBaccaratValue()}");
+        }
+        // do nothing
     }
 }
