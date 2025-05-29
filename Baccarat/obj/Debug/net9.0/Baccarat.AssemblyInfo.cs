@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Baccarat")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f9f1706ea38f8ad67ce9efc080aa606334236731")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4230da67559462c3a1749e451d49fae72608262f")]
 [assembly: System.Reflection.AssemblyProductAttribute("Baccarat")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Baccarat")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

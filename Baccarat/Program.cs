@@ -8,13 +8,16 @@ public class Baccarat
     {
         Deck deck = new Deck();
         Console.Write("\n\n\nFilling shoe\n.\n.\n.\n");
-        deck.FillDeck(1); // Fill the deck with 8 decks of cards
+        int numberOfDecks = 500;
+        deck.FillDeck(numberOfDecks); // Fill the deck with 8 decks of cards
         deck.PrintDeck();
         Console.WriteLine("\n\nShuffling shoe\n.\n.\n.\n\n\n");
         deck.ShuffleDeck();
         deck.InsertCutCard();
         deck.PrintDeck();
-        deck.Deal();
+        deck.Deal(numberOfDecks * 13); //Deal enough hands to reach cut card
+        deck.PrintDeck();
+        Console.WriteLine(deck.cards.Count);
 	}
 }
 
@@ -154,33 +157,74 @@ public class Deck
         this.cards.Insert(cutCardPosition, cutCard);
     }
 
-    public void Deal()
+    public void Deal(int i)
     {
-        // Deal two cards to each player
-        Console.WriteLine("\n\nDealing cards...");
-        playerCards.Add(Draw());
-        Console.WriteLine($"Player receives: {playerCards[0].Name}");
+        string listOfWinners = string.Empty;
+        while (i > 0)
+        {
+            playerCards.Clear();
+            bankerCards.Clear();
+            playerThirdCardExists = false;
+            // Deal two cards to each player
+            Console.WriteLine("\n\nDealing cards...");
+            playerCards.Add(Draw());
+            Console.WriteLine($"Player receives: {playerCards[0].Name}");
 
-        playerCards.Add(Draw());
-        Console.WriteLine($"Player receives: {playerCards[1].Name}");
-        Console.WriteLine($"Player Baccarat Value: {PlayerTotalBaccaratValue()}");
+            playerCards.Add(Draw());
+            Console.WriteLine($"Player receives: {playerCards[1].Name}");
+            Console.WriteLine($"Player Baccarat Value: {PlayerTotalBaccaratValue()}");
 
-        bankerCards.Add(Draw());
-        Console.WriteLine($"\nBanker receives: {bankerCards[0].Name}");
+            bankerCards.Add(Draw());
+            Console.WriteLine($"\nBanker receives: {bankerCards[0].Name}");
 
-        bankerCards.Add(Draw());
-        Console.WriteLine($"Banker receives: {bankerCards[1].Name}");
-        Console.WriteLine($"Banker Baccarat Value: {bankerTotalBaccaratValue()}");
+            bankerCards.Add(Draw());
+            Console.WriteLine($"Banker receives: {bankerCards[1].Name}");
+            Console.WriteLine($"Banker Baccarat Value: {BankerTotalBaccaratValue()}");
 
-        PlayerThirdCardRule();
-        BankerThirdCardRule();
+            if (NaturalWin())
+            {
+                Console.WriteLine("\nNatural win! No third card drawn.");
+                DetemineWinnerAndSave(ref listOfWinners);
+                Console.WriteLine($"List of winners: {listOfWinners}");
+                Console.WriteLine($"Hands remaining: {i - 1}");
+            }
+            else
+            {                
+                PlayerThirdCardRule();
+                BankerThirdCardRule();
+                DetemineWinnerAndSave(ref listOfWinners);
+                Console.WriteLine($"List of winners: {listOfWinners}");
+                Console.WriteLine($"Hands remaining: {i - 1}");
+            }
+            i--;
+        }        
     }
 
     public Card Draw()
     {
+        CheckCutCard();
         Card card = this.cards[this.cards.Count - 1];
         this.cards.RemoveAt(this.cards.Count - 1);
         return card;
+    }
+
+    public void CheckCutCard()
+    {
+        if (this.cards.Count == 0)
+        {
+            //Console.WriteLine("No cards left in the deck. Shuffling...");
+            //FillDeck(1); // Refill the deck with 1 deck of cards
+            //ShuffleDeck();
+            //InsertCutCard();
+        }
+        else if (this.cards[this.cards.Count - 1].Value == 0) // Check for cut card
+        {
+            Console.WriteLine("Cut card drawn");
+            Environment.Exit(0);
+            //this.cards.RemoveAt(this.cards.Count - 1); // Remove cut card
+            //ShuffleDeck();
+            //InsertCutCard(); // Reinsert cut card after shuffling
+        }
     }
 
     public int PlayerTotalBaccaratValue()
@@ -193,7 +237,7 @@ public class Deck
         return playerTotal % 10;
     }
 
-    public int bankerTotalBaccaratValue()
+    public int BankerTotalBaccaratValue()
     {
         int bankerTotal = 0;
         foreach (Card card in bankerCards)
@@ -201,6 +245,12 @@ public class Deck
             bankerTotal += card.BaccaratValue;
         }
         return bankerTotal % 10;
+    }
+
+    public bool NaturalWin()
+    {
+        return PlayerTotalBaccaratValue() == 8 || PlayerTotalBaccaratValue() == 9 ||
+               BankerTotalBaccaratValue() == 8 || BankerTotalBaccaratValue() == 9;
     }
 
     public void PlayerThirdCardRule()
@@ -222,20 +272,42 @@ public class Deck
         //banker == 4 and player 3rd card btwn 2-7 inclusive
         //banker == 5 and player 3rd card btwn 4-7 inclusive
         //banker == 6 and player 3rd card btwn 6-7 inclusive
-        if (bankerTotalBaccaratValue() <= 2 ||
+        if (BankerTotalBaccaratValue() <= 2 ||
             (playerThirdCardExists &&
-            ((bankerTotalBaccaratValue() == 3 && playerCards[2].BaccaratValue == 8) ||
-            (bankerTotalBaccaratValue() == 4 && playerCards[2].BaccaratValue >= 2 && playerCards[2].BaccaratValue <= 7) ||
-            (bankerTotalBaccaratValue() == 5 && playerCards[2].BaccaratValue >= 4 && playerCards[2].BaccaratValue <= 7) ||
-            (bankerTotalBaccaratValue() == 6 && playerCards[2].BaccaratValue >= 6 && playerCards[2].BaccaratValue <= 7)
+            ((BankerTotalBaccaratValue() == 3 && playerCards[2].BaccaratValue == 8) ||
+            (BankerTotalBaccaratValue() == 4 && playerCards[2].BaccaratValue >= 2 && playerCards[2].BaccaratValue <= 7) ||
+            (BankerTotalBaccaratValue() == 5 && playerCards[2].BaccaratValue >= 4 && playerCards[2].BaccaratValue <= 7) ||
+            (BankerTotalBaccaratValue() == 6 && playerCards[2].BaccaratValue >= 6 && playerCards[2].BaccaratValue <= 7)
             ))
+            // If the player stood pat (i.e. has only two cards), the banker regards only their own hand and acts according 
+            // to the same rule as the player, i.e. the banker draws a third card with hands 5 or less and stands with 6 or 7.
+            || (!playerThirdCardExists && BankerTotalBaccaratValue() <= 5)
         )
         {
             bankerCards.Add(Draw());
             bankerThirdCardExists = true;
             Console.WriteLine($"\nBanker 3rd rule applies and draws {bankerCards[2].Name}");
-            Console.WriteLine($"Banker total: {bankerTotalBaccaratValue()}");
+            Console.WriteLine($"Banker total: {BankerTotalBaccaratValue()}");
         }
         // do nothing
+    }
+
+    public void DetemineWinnerAndSave(ref string listOfWinners)
+    {
+        if (PlayerTotalBaccaratValue() > BankerTotalBaccaratValue())
+        {
+            Console.WriteLine("\nPlayer wins!");
+            listOfWinners += "P";
+        }
+        else if (PlayerTotalBaccaratValue() < BankerTotalBaccaratValue())
+        {
+            Console.WriteLine("\nBanker wins!");
+            listOfWinners += "B";
+        }
+        else
+        {
+            Console.WriteLine("\nIt's a tie!");
+            listOfWinners += "T";
+        }
     }
 }
