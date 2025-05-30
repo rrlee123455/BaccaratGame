@@ -8,19 +8,19 @@
     "net9.0": []
   },
   "packageFolders": {
-    "C:\\Users\\amath\\.nuget\\packages\\": {}
+    "/Users/raymondlee/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\amath\\Documents\\GitHub\\BaccaratGame\\Baccarat\\Baccarat.csproj",
+      "projectUniqueName": "/Users/raymondlee/CsharpProjects/BaccaratGame/Baccarat/Baccarat.csproj",
       "projectName": "Baccarat",
-      "projectPath": "C:\\Users\\amath\\Documents\\GitHub\\BaccaratGame\\Baccarat\\Baccarat.csproj",
-      "packagesPath": "C:\\Users\\amath\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\amath\\Documents\\GitHub\\BaccaratGame\\Baccarat\\obj\\",
+      "projectPath": "/Users/raymondlee/CsharpProjects/BaccaratGame/Baccarat/Baccarat.csproj",
+      "packagesPath": "/Users/raymondlee/.nuget/packages/",
+      "outputPath": "/Users/raymondlee/CsharpProjects/BaccaratGame/Baccarat/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\amath\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/Users/raymondlee/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -44,7 +44,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.300"
+      "SdkAnalysisLevel": "9.0.200"
     },
     "frameworks": {
       "net9.0": {
@@ -65,7 +65,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.200/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

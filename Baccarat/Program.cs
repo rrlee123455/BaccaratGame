@@ -120,6 +120,8 @@ public class Deck
     private List<Card> bankerCards = new List<Card>();
     private bool playerThirdCardExists = false;
     private bool bankerThirdCardExists = false;
+
+    private string listOfWinners = "";
     public void FillDeck(int NumberofDecks)
     {
         int totalCards = NumberofDecks * 52;
@@ -150,6 +152,7 @@ public class Deck
             int j = rng.Next(0, i + 1);
             (this.cards[i], this.cards[j]) = (this.cards[j], this.cards[i]);
         }
+        listOfWinners = ""; //reset list of winners
     }
 
     public void InsertCutCard()
@@ -164,7 +167,6 @@ public class Deck
     {
         if (test)
         {
-            string listOfWinners = string.Empty;
             for (int i = 0; i <= 9; i++)
             {
                 for (int j = 0; j <= 9; j++)
@@ -245,7 +247,6 @@ public class Deck
 
     public void Deal(int i)
     {
-        string listOfWinners = string.Empty;
         while (i > 0)
         {
             playerCards.Clear();
@@ -380,6 +381,7 @@ public class Deck
 
     public void DetemineWinnerAndSave(ref string listOfWinners)
     {
+
         if (PlayerTotalBaccaratValue() > BankerTotalBaccaratValue())
         {
             Console.WriteLine("\nPlayer wins!");
