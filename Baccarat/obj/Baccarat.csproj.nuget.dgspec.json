@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/raymondlee/CsharpProjects/BaccaratGame/Baccarat/Baccarat.csproj": {}
+    "C:\\Users\\Ray\\Documents\\GitHub\\BaccaratGame\\BaccaratGame\\Baccarat\\Baccarat.csproj": {}
   },
   "projects": {
-    "/Users/raymondlee/CsharpProjects/BaccaratGame/Baccarat/Baccarat.csproj": {
+    "C:\\Users\\Ray\\Documents\\GitHub\\BaccaratGame\\BaccaratGame\\Baccarat\\Baccarat.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/raymondlee/CsharpProjects/BaccaratGame/Baccarat/Baccarat.csproj",
+        "projectUniqueName": "C:\\Users\\Ray\\Documents\\GitHub\\BaccaratGame\\BaccaratGame\\Baccarat\\Baccarat.csproj",
         "projectName": "Baccarat",
-        "projectPath": "/Users/raymondlee/CsharpProjects/BaccaratGame/Baccarat/Baccarat.csproj",
-        "packagesPath": "/Users/raymondlee/.nuget/packages/",
-        "outputPath": "/Users/raymondlee/CsharpProjects/BaccaratGame/Baccarat/obj/",
+        "projectPath": "C:\\Users\\Ray\\Documents\\GitHub\\BaccaratGame\\BaccaratGame\\Baccarat\\Baccarat.csproj",
+        "packagesPath": "C:\\Users\\Ray\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Ray\\Documents\\GitHub\\BaccaratGame\\BaccaratGame\\Baccarat\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/raymondlee/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Ray\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -38,7 +38,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.200"
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net9.0": {
@@ -59,7 +59,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

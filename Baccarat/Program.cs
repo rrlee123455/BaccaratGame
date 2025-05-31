@@ -7,10 +7,10 @@ public class Baccarat
 {
     public static void Main()
     {
-        // Ctrl + / to un/comment blocks of lines 
+        // Ctrl + / to un/comment blocks of lines
         Deck deck = new Deck();
         Console.Write("\nFilling shoe...");
-        int numberOfDecks = 1;
+        int numberOfDecks = 8;
         deck.FillDeck(numberOfDecks); // Fill the deck with 8 decks of cards
         deck.PrintDeck();
         Console.WriteLine("\n\nShuffling shoe\n.\n.\n.\n\n\n");
@@ -223,7 +223,7 @@ public class Deck
                                 (BankerTotalBaccaratValue() == 5 && playerCards[2].BaccaratValue >= 4 && playerCards[2].BaccaratValue <= 7) ||
                                 (BankerTotalBaccaratValue() == 6 && playerCards[2].BaccaratValue >= 6 && playerCards[2].BaccaratValue <= 7)
                                 ))
-                                // If the player stood pat (i.e. has only two cards), the banker regards only their own hand and acts according 
+                                // If the player stood pat (i.e. has only two cards), the banker regards only their own hand and acts according
                                 // to the same rule as the player, i.e. the banker draws a third card with hands 5 or less and stands with 6 or 7.
                                 || (!playerThirdCardExists && BankerTotalBaccaratValue() <= 5)
                             )
@@ -238,11 +238,11 @@ public class Deck
                             Console.WriteLine($"List of winners: {listOfWinners}");
                             //Console.WriteLine($"Hands remaining: {i - 1}");
                         }
-                        
+
                     }
                 }
             }
-        }        
+        }
     }
 
     public void Deal(int i)
@@ -307,6 +307,7 @@ public class Deck
         else if (this.cards[this.cards.Count - 1].Value == 0) // Check for cut card
         {
             Console.WriteLine("Cut card drawn");
+            ExportToCSV();
             Environment.Exit(0);
             //this.cards.RemoveAt(this.cards.Count - 1); // Remove cut card
             //ShuffleDeck();
@@ -366,7 +367,7 @@ public class Deck
             (BankerTotalBaccaratValue() == 5 && playerCards[2].BaccaratValue >= 4 && playerCards[2].BaccaratValue <= 7) ||
             (BankerTotalBaccaratValue() == 6 && playerCards[2].BaccaratValue >= 6 && playerCards[2].BaccaratValue <= 7)
             ))
-            // If the player stood pat (i.e. has only two cards), the banker regards only their own hand and acts according 
+            // If the player stood pat (i.e. has only two cards), the banker regards only their own hand and acts according
             // to the same rule as the player, i.e. the banker draws a third card with hands 5 or less and stands with 6 or 7.
             || (!playerThirdCardExists && BankerTotalBaccaratValue() <= 5)
         )
@@ -397,5 +398,14 @@ public class Deck
             Console.WriteLine("\nIt's a tie!");
             listOfWinners += "T";
         }
+    }
+
+    public void ExportToCSV()
+    {
+        using (StreamWriter sw = new StreamWriter("results.txt", false))
+        {
+            sw.WriteLine(listOfWinners);
+        }
+        Console.WriteLine("File exported!");
     }
 }
