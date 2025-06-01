@@ -120,7 +120,6 @@ public class Deck
     private List<Card> bankerCards = new List<Card>();
     private bool playerThirdCardExists = false;
     private bool bankerThirdCardExists = false;
-
     private string listOfWinners = "";
     public void FillDeck(int NumberofDecks)
     {
@@ -362,7 +361,7 @@ public class Deck
         //banker == 6 and player 3rd card btwn 6-7 inclusive
         if (BankerTotalBaccaratValue() <= 2 ||
             (playerThirdCardExists &&
-            ((BankerTotalBaccaratValue() == 3 && playerCards[2].BaccaratValue == 8) ||
+            ((BankerTotalBaccaratValue() == 3 && playerCards[2].BaccaratValue != 8) ||
             (BankerTotalBaccaratValue() == 4 && playerCards[2].BaccaratValue >= 2 && playerCards[2].BaccaratValue <= 7) ||
             (BankerTotalBaccaratValue() == 5 && playerCards[2].BaccaratValue >= 4 && playerCards[2].BaccaratValue <= 7) ||
             (BankerTotalBaccaratValue() == 6 && playerCards[2].BaccaratValue >= 6 && playerCards[2].BaccaratValue <= 7)
