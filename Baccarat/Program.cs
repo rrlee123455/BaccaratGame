@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.ExceptionServices;
+using Microsoft.VisualBasic;
 public class Baccarat
 {
     public static void Main()
@@ -10,17 +11,17 @@ public class Baccarat
         // Ctrl + / to un/comment blocks of lines
         Deck deck = new Deck();
         Console.Write("\nFilling shoe...");
-        int numberOfDecks = 8;
+        int numberOfDecks = 1;
         deck.FillDeck(numberOfDecks); // Fill the deck with 8 decks of cards
         deck.PrintDeck();
-        Console.WriteLine("\n\nShuffling shoe\n.\n.\n.\n\n\n");
+        Console.WriteLine("\nShuffling shoe\n");
         deck.ShuffleDeck();
         deck.InsertCutCard();
         deck.PrintDeck();
         deck.Deal(numberOfDecks * 13); // Deal enough hands to reach cut card
-        deck.PrintDeck();
-        Console.WriteLine(deck.cards.Count);
-        deck.CheckAllRules(false);
+        //deck.PrintDeck();
+        //Console.WriteLine(deck.cards.Count);
+        //deck.CheckAllRules(false);
     }
 }
 
@@ -112,6 +113,11 @@ public class Card
     {}
 }
 
+public struct EVbyRunningCount
+{
+    public double PlayerEV;
+    public double BankerEV;
+}
 public class Deck
 {
     public List<Card> cards = new List<Card>();
@@ -121,6 +127,60 @@ public class Deck
     private bool playerThirdCardExists = false;
     private bool bankerThirdCardExists = false;
     private string listOfWinners = "";
+    Dictionary<int, EVbyRunningCount> EVRC = new Dictionary<int, EVbyRunningCount>()
+    {
+        { -25, new EVbyRunningCount { PlayerEV = -0.0083, BankerEV = -0.0146 } },
+        { -24, new EVbyRunningCount { PlayerEV = -0.0081, BankerEV = -0.0147 } },
+        { -23, new EVbyRunningCount { PlayerEV = -0.0076, BankerEV = -0.0152 } },
+        { -22, new EVbyRunningCount { PlayerEV = -0.0083, BankerEV = -0.0145 } },
+        { -21, new EVbyRunningCount { PlayerEV = -0.0085, BankerEV = -0.0144 } },
+        { -20, new EVbyRunningCount { PlayerEV = -0.0089, BankerEV = -0.014 } },
+        { -19, new EVbyRunningCount { PlayerEV = -0.0087, BankerEV = -0.0142 } },
+        { -18, new EVbyRunningCount { PlayerEV = -0.0088, BankerEV = -0.0141 } },
+        { -17, new EVbyRunningCount { PlayerEV = -0.0091, BankerEV = -0.0137 } },
+        { -16, new EVbyRunningCount { PlayerEV = -0.0092, BankerEV = -0.0136 } },
+        { -15, new EVbyRunningCount { PlayerEV = -0.0094, BankerEV = -0.0135 } },
+        { -14, new EVbyRunningCount { PlayerEV = -0.0095, BankerEV = -0.0134 } },
+        { -13, new EVbyRunningCount { PlayerEV = -0.0098, BankerEV = -0.0131 } },
+        { -12, new EVbyRunningCount { PlayerEV = -0.0098, BankerEV = -0.0131 } },
+        { -11, new EVbyRunningCount { PlayerEV = -0.0101, BankerEV = -0.0128 } },
+        { -10, new EVbyRunningCount { PlayerEV = -0.0101, BankerEV = -0.0128 } },
+        { -9, new EVbyRunningCount { PlayerEV = -0.0103, BankerEV = -0.0126 } },
+        { -8, new EVbyRunningCount { PlayerEV = -0.0105, BankerEV = -0.0123 } },
+        { -7, new EVbyRunningCount { PlayerEV = -0.0107, BankerEV = -0.0122 } },
+        { -6, new EVbyRunningCount { PlayerEV = -0.0109, BankerEV = -0.012 } },
+        { -5, new EVbyRunningCount { PlayerEV = -0.0112, BankerEV = -0.0117 } },
+        { -4, new EVbyRunningCount { PlayerEV = -0.0114, BankerEV = -0.0115 } },
+        { -3, new EVbyRunningCount { PlayerEV = -0.0117, BankerEV = -0.0113 } },
+        { -2, new EVbyRunningCount { PlayerEV = -0.0119, BankerEV = -0.011 } },
+        { -1, new EVbyRunningCount { PlayerEV = -0.0121, BankerEV = -0.0108 } },
+        { 0, new EVbyRunningCount { PlayerEV = -0.0124, BankerEV = -0.0105 } },
+        { 1, new EVbyRunningCount { PlayerEV = -0.0126, BankerEV = -0.0103 } },
+        { 2, new EVbyRunningCount { PlayerEV = -0.0129, BankerEV = -0.0101 } },
+        { 3, new EVbyRunningCount { PlayerEV = -0.0132, BankerEV = -0.0098 } },
+        { 4, new EVbyRunningCount { PlayerEV = -0.0133, BankerEV = -0.0097 } },
+        { 5, new EVbyRunningCount { PlayerEV = -0.0136, BankerEV = -0.0094 } },
+        { 6, new EVbyRunningCount { PlayerEV = -0.0138, BankerEV = -0.0092 } },
+        { 7, new EVbyRunningCount { PlayerEV = -0.0139, BankerEV = -0.009 } },
+        { 8, new EVbyRunningCount { PlayerEV = -0.0141, BankerEV = -0.0088 } },
+        { 9, new EVbyRunningCount { PlayerEV = -0.0142, BankerEV = -0.0088 } },
+        { 10, new EVbyRunningCount { PlayerEV = -0.0144, BankerEV = -0.0086 } },
+        { 11, new EVbyRunningCount { PlayerEV = -0.0145, BankerEV = -0.0084 } },
+        { 12, new EVbyRunningCount { PlayerEV = -0.0147, BankerEV = -0.0083 } },
+        { 13, new EVbyRunningCount { PlayerEV = -0.0149, BankerEV = -0.0081 } },
+        { 14, new EVbyRunningCount { PlayerEV = -0.015, BankerEV = -0.008 } },
+        { 15, new EVbyRunningCount { PlayerEV = -0.0151, BankerEV = -0.0079 } },
+        { 16, new EVbyRunningCount { PlayerEV = -0.0153, BankerEV = -0.0076 } },
+        { 17, new EVbyRunningCount { PlayerEV = -0.0153, BankerEV = -0.0077 } },
+        { 18, new EVbyRunningCount { PlayerEV = -0.0155, BankerEV = -0.0075 } },
+        { 19, new EVbyRunningCount { PlayerEV = -0.0159, BankerEV = -0.0071 } },
+        { 20, new EVbyRunningCount { PlayerEV = -0.0157, BankerEV = -0.0072 } },
+        { 21, new EVbyRunningCount { PlayerEV = -0.0155, BankerEV = -0.0075 } },
+        { 22, new EVbyRunningCount { PlayerEV = -0.0159, BankerEV = -0.0071 } },
+        { 23, new EVbyRunningCount { PlayerEV = -0.0165, BankerEV = -0.0065 } },
+        { 24, new EVbyRunningCount { PlayerEV = -0.0155, BankerEV = -0.0075 } },
+        { 25, new EVbyRunningCount { PlayerEV = -0.0176, BankerEV = -0.0055 } },
+    };
     public void FillDeck(int NumberofDecks)
     {
         int totalCards = NumberofDecks * 52;
@@ -282,8 +342,35 @@ public class Deck
                 Console.WriteLine($"List of winners: {listOfWinners}");
                 Console.WriteLine($"Hands remaining: {i - 1}");
             }
+
+            Console.WriteLine($"Running count: {RunningCount()}");
+            Console.WriteLine($"Player EV: {EVRC[RunningCount()].PlayerEV}");
+            Console.WriteLine($"Banker EV: {EVRC[RunningCount()].BankerEV}");
             i--;
         }
+    }
+
+    public int RunningCount()
+    {
+        // Running count from https://wizardofodds.com/games/baccarat/card-counting/
+        // But values are reversed because we're counting cards left in the deck, not ones already dealt
+        int runningCount = 0;
+        foreach (Card card in this.cards)
+        {
+            if (card.BaccaratValue == 9 || card.BaccaratValue == 0) // Face cards and 9s
+            {
+                continue; // No value change for face cards and 9s
+            }
+            else if (card.BaccaratValue <= 4)
+            {
+                runningCount -= 1; // Low cards
+            }
+            else
+            {
+                runningCount += 1; // High cards
+            }
+        }
+        return runningCount;
     }
 
     public Card Draw()
