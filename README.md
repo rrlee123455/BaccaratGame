@@ -6,6 +6,8 @@ In VS Code, stage (optional), commit (and stage if not), sync changes (pull and 
 
 
 Baccarat game:
+<img width="490" alt="image" src="https://github.com/user-attachments/assets/2708ce5f-3da8-4052-846e-75814e9cc980" />
+Sample game simulation, .txt exported for ChatGPT Trend Analysis
 
 Functions:
 
