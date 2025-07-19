@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\amath\\Documents\\GitHub\\BaccaratGame\\Baccarat\\Baccarat.csproj": {}
+    "C:\\Users\\amath\\Documents\\GitHub\\BaccaratGame\\Baccarat\\Baccarat.csproj": {}
   },
   "projects": {
-    "c:\\Users\\amath\\Documents\\GitHub\\BaccaratGame\\Baccarat\\Baccarat.csproj": {
+    "C:\\Users\\amath\\Documents\\GitHub\\BaccaratGame\\Baccarat\\Baccarat.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\amath\\Documents\\GitHub\\BaccaratGame\\Baccarat\\Baccarat.csproj",
+        "projectUniqueName": "C:\\Users\\amath\\Documents\\GitHub\\BaccaratGame\\Baccarat\\Baccarat.csproj",
         "projectName": "Baccarat",
-        "projectPath": "c:\\Users\\amath\\Documents\\GitHub\\BaccaratGame\\Baccarat\\Baccarat.csproj",
+        "projectPath": "C:\\Users\\amath\\Documents\\GitHub\\BaccaratGame\\Baccarat\\Baccarat.csproj",
         "packagesPath": "C:\\Users\\amath\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\amath\\Documents\\GitHub\\BaccaratGame\\Baccarat\\obj\\",
+        "outputPath": "C:\\Users\\amath\\Documents\\GitHub\\BaccaratGame\\Baccarat\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\amath\\AppData\\Roaming\\NuGet\\NuGet.Config"
