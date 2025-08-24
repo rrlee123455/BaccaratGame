@@ -1,10 +1,4 @@
 # BaccaratGame
- Baccarat game
-In VS Code, stage (optional), commit (and stage if not), sync changes (pull and push commits from and to origin/main)
-- Use git fetch when you want to preview changes before merging.
-- Use git pull when you want the latest updates applied right away.
-
-
 Baccarat game:
 Sample game simulation, .txt exported for ChatGPT Trend Analysis
 
@@ -16,18 +10,16 @@ Functions:
 0.1) Copy the deck 8 times
 1) Shuffle - Fisher Yates function
 1.1) Insert cut-card
-2) Extra Credit 
-2.1) Betting function 
-2.2) Tie bets
-2.3) Side bets
-3) Deal all cards
-3.1) Deal third card
-4) Record who wins
-4.1) Compare hands
-4.2) Pay out to winners, receive from losers
-5) Output list of winners
-5.1) Write CSV output.
+2) Deal all cards
+2.1) Deal third card
+2.2) Remove card after dealt
+3) Record who wins
+3.1) Compare hands
+3.2) Pay out to winners, receive from losers
+4) Output list of winners
+4.1) Write CSV output.
 
-Wants:
-Loopability
-Remove card after dealt
+Extra Credit:  
+Betting function  
+-Tie bets  
+-Side bets  
