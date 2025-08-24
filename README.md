@@ -14,8 +14,9 @@ Functions:
 2.1) Deal third card
 2.2) Remove card after dealt
 3) Record who wins
-3.1) Compare hands
-3.2) Pay out to winners, receive from losers
+3.1) Compare hands  
+3.2) Update running count
+3.3) Display EVs  
 4) Output list of winners
 4.1) Write CSV output.
 
@@ -23,3 +24,4 @@ Extra Credit:
 Betting function  
 -Tie bets  
 -Side bets  
+-Pay out to winners, receive from losers
